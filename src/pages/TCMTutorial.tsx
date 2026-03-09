@@ -29,29 +29,38 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SCENES: { key: SceneState; label: string; icon: any; description: string }[] = [
-  {
-    key: "healthy",
-    label: "Healthy Flow",
-    icon: Play,
-    description:
-      "Watch your Emotional Metabolism when life is good. Experiences flow smoothly from rest → vision → joy → focus → release.",
-  },
-  {
-    key: "crash",
-    label: "System Crash",
-    icon: Zap,
-    description:
-      "A stressor hits your Wood element. It becomes rigid, bullies Earth (digestion), cuts off Metal (boundaries). This is why stress ruins your digestion and keeps you awake at night.",
-  },
-  {
-    key: "healing",
-    label: "Interactive Healing",
-    icon: Hand,
-    description:
-      "To fix your digestion and calm your mind, soften the Wood. Press and hold the green Wood node to breathe flexibility back into your system.",
-  },
+const CYCLE_MODES: { key: CycleMode; label: string; icon: any; color: string }[] = [
+  { key: "generating", label: "Generating", icon: Play, color: "text-green-400" },
+  { key: "controlling", label: "Controlling", icon: Zap, color: "text-amber-400" },
+  { key: "overacting", label: "Overacting", icon: Flame, color: "text-red-400" },
 ];
+
+const SCENE_BUTTONS: { key: SceneState; label: string; icon: any }[] = [
+  { key: "healthy", label: "Healthy", icon: Play },
+  { key: "crash", label: "Crash", icon: Zap },
+  { key: "healing", label: "Heal", icon: Hand },
+];
+
+const CYCLE_DESCRIPTIONS: Record<CycleMode, Record<SceneState, string>> = {
+  generating: {
+    healthy: "The Generating Cycle (相生): Each element nourishes the next like a mother feeding her child. Water → Wood → Fire → Earth → Metal → Water. This is your system in harmony.",
+    crash: "The flow is broken! A stressor disrupts the smooth generating sequence. Energy stagnates and elements can't nourish each other. The chain reaction cascades through the whole system.",
+    healing: "Click and hold any element node in the 3D scene to breathe energy back into the cycle and restore the generating flow.",
+    healed: "Balance restored! The harmonious generating cycle flows smoothly again.",
+  },
+  controlling: {
+    healthy: "The Controlling Cycle (相克): Each element keeps another in check — Water controls Fire, Fire controls Metal, Metal controls Wood, Wood controls Earth, Earth controls Water. This is your body's natural checks & balances.",
+    crash: "The controls have become aggressive! Instead of gentle regulation, each element is attacking its target. The star pattern of balance has turned destructive.",
+    healing: "Click and hold the central element causing the most disruption to restore gentle control. Each element should check — not crush — its target.",
+    healed: "The controlling cycle is balanced again. Gentle regulation, not aggression.",
+  },
+  overacting: {
+    healthy: "The Overacting Cycle (相乘) is a pathological state where one element bullies another. Currently the system is balanced — trigger a crash to see what happens when an element becomes too strong.",
+    crash: "Wood has become rigid and is bullying Earth directly — bypassing Fire. Earth (digestion) is collapsing, Metal (boundaries) is starving. Fire flares wildly. This is why stress destroys your digestion.",
+    healing: "Click and hold the bullying element (Wood — green node) to soften it. Breathe flexibility back in to stop the overacting cycle.",
+    healed: "The bully has been calmed. The overacting cycle is broken and normal flow resumes.",
+  },
+};
 
 const ELEMENTS = [
   {
