@@ -38,6 +38,15 @@ export default function HerbDetail() {
       <DisclaimerBanner />
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">
+          {herb.image_url && (
+            <div className="rounded-xl overflow-hidden border border-border bg-muted/20 p-4 flex items-center justify-center">
+              <img
+                src={herb.image_url}
+                alt={`Botanical illustration of ${herb.common_name}`}
+                className="max-h-72 object-contain rounded-lg"
+              />
+            </div>
+          )}
           {herb.description && (
             <section>
               <h2 className="text-xl font-display font-semibold mb-2">Description</h2>
@@ -56,7 +65,7 @@ export default function HerbDetail() {
             <div className="bg-card border border-border rounded-lg p-4">
               <h3 className="font-display font-semibold mb-2">Synonyms</h3>
               <div className="flex flex-wrap gap-1">
-                {herb.synonyms.map((s, i) => <span key={i} className="text-xs bg-muted px-2 py-1 rounded font-body">{s}</span>)}
+                {herb.synonyms.map((s: string, i: number) => <span key={i} className="text-xs bg-muted px-2 py-1 rounded font-body">{s}</span>)}
               </div>
             </div>
           )}
