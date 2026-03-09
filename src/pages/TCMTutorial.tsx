@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { EmotionalMetabolism, SceneState } from "@/components/tcm/EmotionalMetabolism";
+import { EmotionalMetabolism, SceneState, CycleMode } from "@/components/tcm/EmotionalMetabolism";
+import { ElementType } from "@/components/tcm/ElementNode";
 import { BodyClock } from "@/components/tcm/BodyClock";
 import { MeridianPathways } from "@/components/tcm/MeridianPathways";
 import { SectionHeader } from "@/components/SectionHeader";
