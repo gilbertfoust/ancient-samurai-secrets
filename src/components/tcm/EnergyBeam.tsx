@@ -1,6 +1,9 @@
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useRef, useMemo } from "react";
+import { useFrame, extend } from "@react-three/fiber";
 import * as THREE from "three";
+
+// Ensure Three.js Line is available as a R3F element
+extend({ Line_: THREE.Line });
 
 interface EnergyBeamProps {
   start: [number, number, number];
