@@ -155,31 +155,67 @@ export default function Prevention() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="blood" className="mt-4">
-            <Card className="border-border/60">
-              <CardContent className="pt-6">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="font-display">Type</TableHead>
-                      <TableHead className="font-display">Category</TableHead>
-                      <TableHead className="font-display">Allowed</TableHead>
-                      <TableHead className="font-display">Limit</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {bloodType?.map((b) => (
-                      <TableRow key={b.id}>
-                        <TableCell className="font-body font-medium">{b.blood_type}</TableCell>
-                        <TableCell className="font-body">{b.category}</TableCell>
-                        <TableCell className="font-body text-muted-foreground">{b.foods_allowed}</TableCell>
-                        <TableCell className="font-body text-muted-foreground">{b.foods_to_limit}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+          <TabsContent value="blood" className="mt-4 space-y-4">
+            {/* Blood Type Selector */}
+            <div className="flex flex-wrap gap-2">
+              {["O", "A", "B", "AB"].map((bt) => {
+                const isActive = selectedBloodType === bt;
+                const count = bloodType?.filter((b) => b.blood_type === bt).length || 0;
+                return (
+                  <button
+                    key={bt}
+                    onClick={() => setSelectedBloodType(bt)}
+                    className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                      isActive
+                        ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                        : "bg-card text-muted-foreground border-border hover:bg-accent hover:text-accent-foreground"
+                    }`}
+                  >
+                    🩸 Type {bt}
+                    <Badge variant="secondary" className="ml-1 text-xs px-1.5 py-0">
+                      {count}
+                    </Badge>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Filtered table */}
+            {(() => {
+              const filtered = bloodType?.filter((b) => b.blood_type === selectedBloodType) || [];
+              const categories = [...new Set(filtered.map((b) => b.category))].sort();
+              return (
+                <div className="space-y-4">
+                  {categories.map((cat) => {
+                    const items = filtered.filter((b) => b.category === cat);
+                    return (
+                      <Card key={cat} className="border-border/60">
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-base font-display">{cat}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="grid gap-3 sm:grid-cols-2">
+                            <div>
+                              <p className="text-xs font-medium text-primary mb-1">✅ Beneficial / Allowed</p>
+                              <p className="text-sm font-body text-muted-foreground">{items[0]?.foods_allowed || "—"}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs font-medium text-destructive mb-1">⚠️ Avoid / Limit</p>
+                              <p className="text-sm font-body text-muted-foreground">{items[0]?.foods_to_limit || "—"}</p>
+                            </div>
+                          </div>
+                          {items[0]?.notes && (
+                            <p className="text-xs font-body text-muted-foreground mt-2 italic border-t border-border/40 pt-2">
+                              {items[0].notes}
+                            </p>
+                          )}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              );
+            })()}
           </TabsContent>
         </Tabs>
       )}
