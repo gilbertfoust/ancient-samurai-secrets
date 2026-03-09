@@ -37,6 +37,7 @@ const MERIDIAN_ORDER = [
   "Stomach",
   "Spleen",
   "Heart",
+  "Small Intestine",
   "Bladder",
   "Kidney",
   "Pericardium",
