@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { EmotionalMetabolism, SceneState } from "@/components/tcm/EmotionalMetabolism";
+import { BodyClock } from "@/components/tcm/BodyClock";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,6 +22,7 @@ import {
   Wind,
   Moon,
   Sun,
+  Clock,
   Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
