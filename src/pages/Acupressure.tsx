@@ -93,16 +93,39 @@ export default function Acupressure() {
         pattern="dots"
       />
 
-      {/* Search */}
-      <div className="relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search points by name, code, or condition..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="pl-10"
-        />
+      {/* Search + Map Toggle */}
+      <div className="flex items-center gap-3">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search points by name, code, or condition..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+        <button
+          onClick={() => setShowMap(!showMap)}
+          className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium border transition-colors ${
+            showMap
+              ? "bg-primary text-primary-foreground border-primary"
+              : "bg-card text-muted-foreground border-border hover:bg-accent"
+          }`}
+        >
+          <Map className="h-4 w-4" />
+          Body Map
+        </button>
       </div>
+
+      {/* Body Map */}
+      {showMap && points && (
+        <Card className="p-4">
+          <BodyMap points={points as any} selectedMeridian={selectedMeridian} />
+          <p className="text-xs text-center text-muted-foreground mt-2">
+            Click any point to view details • Faded dots indicate posterior points
+          </p>
+        </Card>
+      )}
 
       {/* Meridian Filter Tabs */}
       <div className="flex flex-wrap gap-2">
