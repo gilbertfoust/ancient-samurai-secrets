@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { EmotionalMetabolism, SceneState } from "@/components/tcm/EmotionalMetabolism";
 import { BodyClock } from "@/components/tcm/BodyClock";
+import { MeridianPathways } from "@/components/tcm/MeridianPathways";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -274,10 +275,11 @@ export default function TCMTutorial() {
       />
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-5 w-full max-w-3xl">
+        <TabsList className="flex flex-wrap gap-1 w-full max-w-4xl h-auto">
           <TabsTrigger value="interactive">3D Experience</TabsTrigger>
           <TabsTrigger value="elements">Five Elements</TabsTrigger>
           <TabsTrigger value="bodyclock">Body Clock</TabsTrigger>
+          <TabsTrigger value="meridians">Meridians</TabsTrigger>
           <TabsTrigger value="concepts">Core Theory</TabsTrigger>
           <TabsTrigger value="diet">Dietary Therapy</TabsTrigger>
         </TabsList>
@@ -469,7 +471,17 @@ export default function TCMTutorial() {
           <BodyClock />
         </TabsContent>
 
-        {/* ─── CORE THEORY ─── */}
+        {/* ─── MERIDIANS ─── */}
+        <TabsContent value="meridians" className="space-y-6 mt-6">
+          <p className="font-body text-muted-foreground max-w-2xl">
+            The 12 primary meridians (經絡 Jīng Luò) form paired Yin-Yang channels
+            that connect your organs to the surface of your body. Each has specific
+            acupressure points used for thousands of years to restore health.
+          </p>
+          <MeridianPathways />
+        </TabsContent>
+
+
         <TabsContent value="concepts" className="space-y-6 mt-6">
           <p className="font-body text-muted-foreground max-w-2xl">
             The theoretical foundation of Traditional Chinese Medicine spans
