@@ -109,7 +109,6 @@ function Scene({ scene, isHoldingWood, onWoodPointerDown, onWoodPointerUp }: Pro
             color="#94a3b8"
             anchorX="center"
             anchorY="top"
-            font="/fonts/inter.woff"
           >
             {LABELS[el].name}
           </Text>
@@ -123,7 +122,6 @@ function Scene({ scene, isHoldingWood, onWoodPointerDown, onWoodPointerUp }: Pro
             color="#64748b"
             anchorX="center"
             anchorY="top"
-            font="/fonts/inter.woff"
           >
             {LABELS[el].role}
           </Text>

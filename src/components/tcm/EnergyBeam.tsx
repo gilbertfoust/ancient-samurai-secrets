@@ -1,9 +1,7 @@
 import { useRef, useMemo } from "react";
-import { useFrame, extend } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import { Line } from "@react-three/drei";
 import * as THREE from "three";
-
-// Ensure Three.js Line is available as a R3F element
-extend({ Line_: THREE.Line });
 
 interface EnergyBeamProps {
   start: [number, number, number];
@@ -14,41 +12,48 @@ interface EnergyBeamProps {
 }
 
 export function EnergyBeam({ start, end, color, active, jagged }: EnergyBeamProps) {
-  const lineRef = useRef<THREE.Line>(null);
   const particleRef = useRef<THREE.Points>(null);
+
+  const points = useMemo(() => {
+    const midX = (start[0] + end[0]) / 2;
+    const midY = (start[1] + end[1]) / 2 + (jagged ? 0 : 0.3);
+    const midZ = (start[2] + end[2]) / 2;
+
+    const curve = new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(...start),
+      new THREE.Vector3(
+        midX + (jagged ? (Math.random() - 0.5) * 0.5 : 0),
+        midY + (jagged ? (Math.random() - 0.5) * 0.5 : 0),
+        midZ
+      ),
+      new THREE.Vector3(...end)
+    );
+
+    return curve.getPoints(jagged ? 20 : 40).map(p => [p.x, p.y, p.z] as [number, number, number]);
+  }, [start, end, jagged]);
 
   useFrame(() => {
     if (!particleRef.current) return;
     const t = performance.now() * 0.001;
+    const frac = (Math.sin(t * 2) + 1) / 2;
     particleRef.current.position.set(
-      start[0] + (end[0] - start[0]) * ((Math.sin(t * 2) + 1) / 2),
-      start[1] + (end[1] - start[1]) * ((Math.sin(t * 2) + 1) / 2),
-      start[2] + (end[2] - start[2]) * ((Math.sin(t * 2) + 1) / 2)
+      start[0] + (end[0] - start[0]) * frac,
+      start[1] + (end[1] - start[1]) * frac,
+      start[2] + (end[2] - start[2]) * frac
     );
   });
 
   if (!active) return null;
 
-  const midX = (start[0] + end[0]) / 2;
-  const midY = (start[1] + end[1]) / 2 + (jagged ? 0 : 0.3);
-  const midZ = (start[2] + end[2]) / 2;
-
-  const curve = new THREE.QuadraticBezierCurve3(
-    new THREE.Vector3(...start),
-    new THREE.Vector3(
-      midX + (jagged ? (Math.random() - 0.5) * 0.5 : 0),
-      midY + (jagged ? (Math.random() - 0.5) * 0.5 : 0),
-      midZ
-    ),
-    new THREE.Vector3(...end)
-  );
-
-  const points = curve.getPoints(jagged ? 20 : 40);
-  const geometry = new THREE.BufferGeometry().setFromPoints(points);
-
   return (
     <group>
-      <primitive object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color, transparent: true, opacity: jagged ? 0.9 : 0.6 }))} ref={lineRef} />
+      <Line
+        points={points}
+        color={color}
+        lineWidth={jagged ? 2 : 1.5}
+        transparent
+        opacity={jagged ? 0.9 : 0.6}
+      />
       {/* Traveling particle */}
       <points ref={particleRef}>
         <bufferGeometry>
