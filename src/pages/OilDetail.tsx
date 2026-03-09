@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, MapPin, Droplets, AlertTriangle, FlaskConical } from "lucide-react";
 import { Button } from "@/components/ui/button";
