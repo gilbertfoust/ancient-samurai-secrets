@@ -23,6 +23,7 @@ import {
   CalendarCheck,
   GraduationCap,
   BookOpen,
+  Sparkles,
 } from "lucide-react";
 
 const sections = [
@@ -37,6 +38,7 @@ const sections = [
   { label: "Screening", path: "/screening", icon: CalendarCheck },
   { label: "Educational", path: "/educational", icon: GraduationCap },
   { label: "Narratives", path: "/narratives", icon: BookOpen },
+  { label: "TCM Tutorial", path: "/tcm", icon: Sparkles },
 ];
 
 export function AppSidebar() {
