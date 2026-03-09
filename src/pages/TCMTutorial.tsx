@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { EmotionalMetabolism, SceneState } from "@/components/tcm/EmotionalMetabolism";
+import { EmotionalMetabolism, SceneState, CycleMode } from "@/components/tcm/EmotionalMetabolism";
+import { ElementType } from "@/components/tcm/ElementNode";
 import { BodyClock } from "@/components/tcm/BodyClock";
 import { MeridianPathways } from "@/components/tcm/MeridianPathways";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -28,29 +29,38 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SCENES: { key: SceneState; label: string; icon: any; description: string }[] = [
-  {
-    key: "healthy",
-    label: "Healthy Flow",
-    icon: Play,
-    description:
-      "Watch your Emotional Metabolism when life is good. Experiences flow smoothly from rest → vision → joy → focus → release.",
-  },
-  {
-    key: "crash",
-    label: "System Crash",
-    icon: Zap,
-    description:
-      "A stressor hits your Wood element. It becomes rigid, bullies Earth (digestion), cuts off Metal (boundaries). This is why stress ruins your digestion and keeps you awake at night.",
-  },
-  {
-    key: "healing",
-    label: "Interactive Healing",
-    icon: Hand,
-    description:
-      "To fix your digestion and calm your mind, soften the Wood. Press and hold the green Wood node to breathe flexibility back into your system.",
-  },
+const CYCLE_MODES: { key: CycleMode; label: string; icon: any; color: string }[] = [
+  { key: "generating", label: "Generating", icon: Play, color: "text-green-400" },
+  { key: "controlling", label: "Controlling", icon: Zap, color: "text-amber-400" },
+  { key: "overacting", label: "Overacting", icon: Flame, color: "text-red-400" },
 ];
+
+const SCENE_BUTTONS: { key: SceneState; label: string; icon: any }[] = [
+  { key: "healthy", label: "Healthy", icon: Play },
+  { key: "crash", label: "Crash", icon: Zap },
+  { key: "healing", label: "Heal", icon: Hand },
+];
+
+const CYCLE_DESCRIPTIONS: Record<CycleMode, Record<SceneState, string>> = {
+  generating: {
+    healthy: "The Generating Cycle (相生): Each element nourishes the next like a mother feeding her child. Water → Wood → Fire → Earth → Metal → Water. This is your system in harmony.",
+    crash: "The flow is broken! A stressor disrupts the smooth generating sequence. Energy stagnates and elements can't nourish each other. The chain reaction cascades through the whole system.",
+    healing: "Click and hold any element node in the 3D scene to breathe energy back into the cycle and restore the generating flow.",
+    healed: "Balance restored! The harmonious generating cycle flows smoothly again.",
+  },
+  controlling: {
+    healthy: "The Controlling Cycle (相克): Each element keeps another in check — Water controls Fire, Fire controls Metal, Metal controls Wood, Wood controls Earth, Earth controls Water. This is your body's natural checks & balances.",
+    crash: "The controls have become aggressive! Instead of gentle regulation, each element is attacking its target. The star pattern of balance has turned destructive.",
+    healing: "Click and hold the central element causing the most disruption to restore gentle control. Each element should check — not crush — its target.",
+    healed: "The controlling cycle is balanced again. Gentle regulation, not aggression.",
+  },
+  overacting: {
+    healthy: "The Overacting Cycle (相乘) is a pathological state where one element bullies another. Currently the system is balanced — trigger a crash to see what happens when an element becomes too strong.",
+    crash: "Wood has become rigid and is bullying Earth directly — bypassing Fire. Earth (digestion) is collapsing, Metal (boundaries) is starving. Fire flares wildly. This is why stress destroys your digestion.",
+    healing: "Click and hold the bullying element (Wood — green node) to soften it. Breathe flexibility back in to stop the overacting cycle.",
+    healed: "The bully has been calmed. The overacting cycle is broken and normal flow resumes.",
+  },
+};
 
 const ELEMENTS = [
   {
@@ -249,20 +259,29 @@ const DIETARY_THERAPY = [
 ];
 
 export default function TCMTutorial() {
+  const [cycleMode, setCycleMode] = useState<CycleMode>("generating");
   const [currentScene, setCurrentScene] = useState<SceneState>("healthy");
-  const [isHoldingWood, setIsHoldingWood] = useState(false);
+  const [heldElement, setHeldElement] = useState<ElementType | null>(null);
   const [activeTab, setActiveTab] = useState("interactive");
 
-  const handleWoodDown = useCallback(() => {
-    if (currentScene === "healing") setIsHoldingWood(true);
+  const handleElementDown = useCallback((el: ElementType) => {
+    if (currentScene === "healing") setHeldElement(el);
   }, [currentScene]);
 
-  const handleWoodUp = useCallback(() => {
-    if (isHoldingWood) {
-      setIsHoldingWood(false);
+  const handleElementUp = useCallback(() => {
+    if (heldElement) {
+      setHeldElement(null);
       setCurrentScene("healed");
     }
-  }, [isHoldingWood]);
+  }, [heldElement]);
+
+  const switchCycle = useCallback((mode: CycleMode) => {
+    setCycleMode(mode);
+    setCurrentScene("healthy");
+    setHeldElement(null);
+  }, []);
+
+  const description = CYCLE_DESCRIPTIONS[cycleMode][currentScene];
 
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-8 animate-fade-in">
@@ -286,15 +305,37 @@ export default function TCMTutorial() {
 
         {/* ─── 3D INTERACTIVE SCENE ─── */}
         <TabsContent value="interactive" className="space-y-6 mt-6">
+          {/* Cycle mode selector */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-display font-semibold uppercase tracking-wider text-muted-foreground">
+              Select Cycle
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {CYCLE_MODES.map((c) => (
+                <Button
+                  key={c.key}
+                  variant={cycleMode === c.key ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => switchCycle(c.key)}
+                  className="gap-1.5"
+                >
+                  <c.icon className={`h-4 w-4 ${cycleMode === c.key ? "" : c.color}`} />
+                  {c.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Scene state controls */}
           <div className="flex flex-wrap gap-2">
-            {SCENES.map((s) => (
+            {SCENE_BUTTONS.map((s) => (
               <Button
                 key={s.key}
-                variant={currentScene === s.key ? "default" : "outline"}
+                variant={currentScene === s.key ? "secondary" : "ghost"}
                 size="sm"
                 onClick={() => {
                   setCurrentScene(s.key);
-                  setIsHoldingWood(false);
+                  setHeldElement(null);
                 }}
                 className="gap-1.5"
               >
@@ -307,45 +348,45 @@ export default function TCMTutorial() {
               size="sm"
               onClick={() => {
                 setCurrentScene("healthy");
-                setIsHoldingWood(false);
+                setHeldElement(null);
               }}
             >
               <RotateCcw className="h-4 w-4 mr-1" /> Reset
             </Button>
           </div>
 
+          {/* Description */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentScene}
+              key={`${cycleMode}-${currentScene}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               className="rounded-lg bg-accent/40 border border-border/50 p-4"
             >
-              <p className="font-body text-sm text-muted-foreground">
-                {SCENES.find((s) => s.key === currentScene)?.description ||
-                  "The system has been restored. The harmonious circular flow resumes."}
-              </p>
+              <p className="font-body text-sm text-muted-foreground">{description}</p>
             </motion.div>
           </AnimatePresence>
 
+          {/* 3D Scene */}
           <EmotionalMetabolism
+            cycleMode={cycleMode}
             scene={currentScene}
-            isHoldingWood={isHoldingWood}
-            onWoodPointerDown={handleWoodDown}
-            onWoodPointerUp={handleWoodUp}
+            heldElement={heldElement}
+            onElementPointerDown={handleElementDown}
+            onElementPointerUp={handleElementUp}
           />
 
-          {currentScene === "healing" && !isHoldingWood && (
+          {/* Healing prompt */}
+          {currentScene === "healing" && !heldElement && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20"
+              className="text-center p-4 rounded-lg border border-primary/20 bg-primary/5"
             >
-              <Hand className="h-6 w-6 mx-auto mb-2 text-green-400 animate-pulse" />
-              <p className="font-body text-sm text-green-300">
-                Click and hold the <strong>Wood node</strong> (green) in the 3D
-                scene to restore balance
+              <Hand className="h-6 w-6 mx-auto mb-2 text-primary animate-pulse" />
+              <p className="font-body text-sm text-muted-foreground">
+                Click and hold the <strong>stressed element</strong> in the 3D scene to restore balance
               </p>
             </motion.div>
           )}
@@ -358,43 +399,27 @@ export default function TCMTutorial() {
             >
               <Sparkles className="h-6 w-6 mx-auto mb-2 text-primary" />
               <p className="font-body text-sm">
-                Balance restored. The harmonious generating cycle flows again.
+                Balance restored. The {cycleMode} cycle is harmonized.
               </p>
             </motion.div>
           )}
 
-          {/* Cycles section */}
+          {/* Cycles reference */}
           <div className="space-y-4 pt-4">
-            <h2 className="text-2xl font-display font-bold">
-              The Three Cycles
-            </h2>
+            <h2 className="text-2xl font-display font-bold">The Three Cycles</h2>
             <div className="grid gap-4 md:grid-cols-3">
               {CYCLES.map((cycle) => (
-                <Card
-                  key={cycle.name}
-                  className="border-border/60"
-                >
+                <Card key={cycle.name} className="border-border/60">
                   <CardHeader className="pb-2">
-                    <CardTitle className="font-display text-base">
-                      {cycle.name}
-                    </CardTitle>
-                    <p className="text-xs text-muted-foreground font-body">
-                      {cycle.aka}
-                    </p>
+                    <CardTitle className="font-display text-base">{cycle.name}</CardTitle>
+                    <p className="text-xs text-muted-foreground font-body">{cycle.aka}</p>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    <p className="text-sm font-body text-muted-foreground">
-                      {cycle.description}
-                    </p>
-                    <code className="text-xs text-primary block">
-                      {cycle.flow}
-                    </code>
+                    <p className="text-sm font-body text-muted-foreground">{cycle.description}</p>
+                    <code className="text-xs text-primary block">{cycle.flow}</code>
                     <ul className="space-y-1">
                       {cycle.details.map((d, i) => (
-                        <li
-                          key={i}
-                          className="text-xs font-body text-muted-foreground flex gap-1.5"
-                        >
+                        <li key={i} className="text-xs font-body text-muted-foreground flex gap-1.5">
                           <ChevronRight className="h-3 w-3 mt-0.5 shrink-0 text-primary" />
                           {d}
                         </li>
