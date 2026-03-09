@@ -471,7 +471,17 @@ export default function TCMTutorial() {
           <BodyClock />
         </TabsContent>
 
-        {/* ─── CORE THEORY ─── */}
+        {/* ─── MERIDIANS ─── */}
+        <TabsContent value="meridians" className="space-y-6 mt-6">
+          <p className="font-body text-muted-foreground max-w-2xl">
+            The 12 primary meridians (經絡 Jīng Luò) form paired Yin-Yang channels
+            that connect your organs to the surface of your body. Each has specific
+            acupressure points used for thousands of years to restore health.
+          </p>
+          <MeridianPathways />
+        </TabsContent>
+
+
         <TabsContent value="concepts" className="space-y-6 mt-6">
           <p className="font-body text-muted-foreground max-w-2xl">
             The theoretical foundation of Traditional Chinese Medicine spans
