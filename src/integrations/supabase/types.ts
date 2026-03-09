@@ -339,6 +339,7 @@ export type Database = {
           description: string | null
           evidence_label: Database["public"]["Enums"]["evidence_label"]
           id: string
+          image_url: string | null
           latin_name: string | null
           source_id: string | null
           synonyms: string[] | null
@@ -353,6 +354,7 @@ export type Database = {
           description?: string | null
           evidence_label?: Database["public"]["Enums"]["evidence_label"]
           id?: string
+          image_url?: string | null
           latin_name?: string | null
           source_id?: string | null
           synonyms?: string[] | null
@@ -367,6 +369,7 @@ export type Database = {
           description?: string | null
           evidence_label?: Database["public"]["Enums"]["evidence_label"]
           id?: string
+          image_url?: string | null
           latin_name?: string | null
           source_id?: string | null
           synonyms?: string[] | null
