@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
+import LibraryIndex from "./pages/LibraryIndex";
 import Index from "./pages/Index";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/RecipeDetail";
@@ -33,8 +34,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* 3D Library as the main entry */}
+          <Route path="/" element={<LibraryIndex />} />
+
+          {/* Traditional layout routes for direct navigation */}
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Index />} />
+            <Route path="/browse" element={<Index />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipes/:id" element={<RecipeDetail />} />
             <Route path="/remedies" element={<Remedies />} />
