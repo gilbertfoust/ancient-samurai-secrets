@@ -259,20 +259,29 @@ const DIETARY_THERAPY = [
 ];
 
 export default function TCMTutorial() {
+  const [cycleMode, setCycleMode] = useState<CycleMode>("generating");
   const [currentScene, setCurrentScene] = useState<SceneState>("healthy");
-  const [isHoldingWood, setIsHoldingWood] = useState(false);
+  const [heldElement, setHeldElement] = useState<ElementType | null>(null);
   const [activeTab, setActiveTab] = useState("interactive");
 
-  const handleWoodDown = useCallback(() => {
-    if (currentScene === "healing") setIsHoldingWood(true);
+  const handleElementDown = useCallback((el: ElementType) => {
+    if (currentScene === "healing") setHeldElement(el);
   }, [currentScene]);
 
-  const handleWoodUp = useCallback(() => {
-    if (isHoldingWood) {
-      setIsHoldingWood(false);
+  const handleElementUp = useCallback(() => {
+    if (heldElement) {
+      setHeldElement(null);
       setCurrentScene("healed");
     }
-  }, [isHoldingWood]);
+  }, [heldElement]);
+
+  const switchCycle = useCallback((mode: CycleMode) => {
+    setCycleMode(mode);
+    setCurrentScene("healthy");
+    setHeldElement(null);
+  }, []);
+
+  const description = CYCLE_DESCRIPTIONS[cycleMode][currentScene];
 
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-8 animate-fade-in">
@@ -296,15 +305,37 @@ export default function TCMTutorial() {
 
         {/* ─── 3D INTERACTIVE SCENE ─── */}
         <TabsContent value="interactive" className="space-y-6 mt-6">
+          {/* Cycle mode selector */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-display font-semibold uppercase tracking-wider text-muted-foreground">
+              Select Cycle
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {CYCLE_MODES.map((c) => (
+                <Button
+                  key={c.key}
+                  variant={cycleMode === c.key ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => switchCycle(c.key)}
+                  className="gap-1.5"
+                >
+                  <c.icon className={`h-4 w-4 ${cycleMode === c.key ? "" : c.color}`} />
+                  {c.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Scene state controls */}
           <div className="flex flex-wrap gap-2">
-            {SCENES.map((s) => (
+            {SCENE_BUTTONS.map((s) => (
               <Button
                 key={s.key}
-                variant={currentScene === s.key ? "default" : "outline"}
+                variant={currentScene === s.key ? "secondary" : "ghost"}
                 size="sm"
                 onClick={() => {
                   setCurrentScene(s.key);
-                  setIsHoldingWood(false);
+                  setHeldElement(null);
                 }}
                 className="gap-1.5"
               >
@@ -317,45 +348,45 @@ export default function TCMTutorial() {
               size="sm"
               onClick={() => {
                 setCurrentScene("healthy");
-                setIsHoldingWood(false);
+                setHeldElement(null);
               }}
             >
               <RotateCcw className="h-4 w-4 mr-1" /> Reset
             </Button>
           </div>
 
+          {/* Description */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentScene}
+              key={`${cycleMode}-${currentScene}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               className="rounded-lg bg-accent/40 border border-border/50 p-4"
             >
-              <p className="font-body text-sm text-muted-foreground">
-                {SCENES.find((s) => s.key === currentScene)?.description ||
-                  "The system has been restored. The harmonious circular flow resumes."}
-              </p>
+              <p className="font-body text-sm text-muted-foreground">{description}</p>
             </motion.div>
           </AnimatePresence>
 
+          {/* 3D Scene */}
           <EmotionalMetabolism
+            cycleMode={cycleMode}
             scene={currentScene}
-            isHoldingWood={isHoldingWood}
-            onWoodPointerDown={handleWoodDown}
-            onWoodPointerUp={handleWoodUp}
+            heldElement={heldElement}
+            onElementPointerDown={handleElementDown}
+            onElementPointerUp={handleElementUp}
           />
 
-          {currentScene === "healing" && !isHoldingWood && (
+          {/* Healing prompt */}
+          {currentScene === "healing" && !heldElement && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20"
+              className="text-center p-4 rounded-lg border border-primary/20 bg-primary/5"
             >
-              <Hand className="h-6 w-6 mx-auto mb-2 text-green-400 animate-pulse" />
-              <p className="font-body text-sm text-green-300">
-                Click and hold the <strong>Wood node</strong> (green) in the 3D
-                scene to restore balance
+              <Hand className="h-6 w-6 mx-auto mb-2 text-primary animate-pulse" />
+              <p className="font-body text-sm text-muted-foreground">
+                Click and hold the <strong>stressed element</strong> in the 3D scene to restore balance
               </p>
             </motion.div>
           )}
@@ -368,43 +399,27 @@ export default function TCMTutorial() {
             >
               <Sparkles className="h-6 w-6 mx-auto mb-2 text-primary" />
               <p className="font-body text-sm">
-                Balance restored. The harmonious generating cycle flows again.
+                Balance restored. The {cycleMode} cycle is harmonized.
               </p>
             </motion.div>
           )}
 
-          {/* Cycles section */}
+          {/* Cycles reference */}
           <div className="space-y-4 pt-4">
-            <h2 className="text-2xl font-display font-bold">
-              The Three Cycles
-            </h2>
+            <h2 className="text-2xl font-display font-bold">The Three Cycles</h2>
             <div className="grid gap-4 md:grid-cols-3">
               {CYCLES.map((cycle) => (
-                <Card
-                  key={cycle.name}
-                  className="border-border/60"
-                >
+                <Card key={cycle.name} className="border-border/60">
                   <CardHeader className="pb-2">
-                    <CardTitle className="font-display text-base">
-                      {cycle.name}
-                    </CardTitle>
-                    <p className="text-xs text-muted-foreground font-body">
-                      {cycle.aka}
-                    </p>
+                    <CardTitle className="font-display text-base">{cycle.name}</CardTitle>
+                    <p className="text-xs text-muted-foreground font-body">{cycle.aka}</p>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    <p className="text-sm font-body text-muted-foreground">
-                      {cycle.description}
-                    </p>
-                    <code className="text-xs text-primary block">
-                      {cycle.flow}
-                    </code>
+                    <p className="text-sm font-body text-muted-foreground">{cycle.description}</p>
+                    <code className="text-xs text-primary block">{cycle.flow}</code>
                     <ul className="space-y-1">
                       {cycle.details.map((d, i) => (
-                        <li
-                          key={i}
-                          className="text-xs font-body text-muted-foreground flex gap-1.5"
-                        >
+                        <li key={i} className="text-xs font-body text-muted-foreground flex gap-1.5">
                           <ChevronRight className="h-3 w-3 mt-0.5 shrink-0 text-primary" />
                           {d}
                         </li>
