@@ -275,10 +275,11 @@ export default function TCMTutorial() {
       />
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-5 w-full max-w-3xl">
+        <TabsList className="flex flex-wrap gap-1 w-full max-w-4xl h-auto">
           <TabsTrigger value="interactive">3D Experience</TabsTrigger>
           <TabsTrigger value="elements">Five Elements</TabsTrigger>
           <TabsTrigger value="bodyclock">Body Clock</TabsTrigger>
+          <TabsTrigger value="meridians">Meridians</TabsTrigger>
           <TabsTrigger value="concepts">Core Theory</TabsTrigger>
           <TabsTrigger value="diet">Dietary Therapy</TabsTrigger>
         </TabsList>
