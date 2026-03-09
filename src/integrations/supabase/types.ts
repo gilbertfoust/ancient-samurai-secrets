@@ -16,36 +16,51 @@ export type Database = {
     Tables: {
       acupressure_points: {
         Row: {
+          alphanumeric_code: string | null
+          anatomical_location: string | null
           cautions: string | null
+          chinese_name: string | null
           condition: string | null
           created_at: string
           evidence_label: Database["public"]["Enums"]["evidence_label"]
           id: string
           location_description: string | null
+          meridian: string | null
+          notes: string | null
           point_name: string
           source_id: string | null
           steps: string | null
           updated_at: string
         }
         Insert: {
+          alphanumeric_code?: string | null
+          anatomical_location?: string | null
           cautions?: string | null
+          chinese_name?: string | null
           condition?: string | null
           created_at?: string
           evidence_label?: Database["public"]["Enums"]["evidence_label"]
           id?: string
           location_description?: string | null
+          meridian?: string | null
+          notes?: string | null
           point_name: string
           source_id?: string | null
           steps?: string | null
           updated_at?: string
         }
         Update: {
+          alphanumeric_code?: string | null
+          anatomical_location?: string | null
           cautions?: string | null
+          chinese_name?: string | null
           condition?: string | null
           created_at?: string
           evidence_label?: Database["public"]["Enums"]["evidence_label"]
           id?: string
           location_description?: string | null
+          meridian?: string | null
+          notes?: string | null
           point_name?: string
           source_id?: string | null
           steps?: string | null
