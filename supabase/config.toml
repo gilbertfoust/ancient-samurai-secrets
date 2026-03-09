@@ -1,1 +1,4 @@
 project_id = "pxwfrskznsctoxflesyy"
+
+[functions.generate-herb-images]
+verify_jwt = false
