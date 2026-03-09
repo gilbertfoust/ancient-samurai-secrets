@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { EmotionalMetabolism, SceneState } from "@/components/tcm/EmotionalMetabolism";
+import { BodyClock } from "@/components/tcm/BodyClock";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,6 +22,7 @@ import {
   Wind,
   Moon,
   Sun,
+  Clock,
   Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -272,9 +274,10 @@ export default function TCMTutorial() {
       />
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-4 w-full max-w-2xl">
+        <TabsList className="grid grid-cols-5 w-full max-w-3xl">
           <TabsTrigger value="interactive">3D Experience</TabsTrigger>
           <TabsTrigger value="elements">Five Elements</TabsTrigger>
+          <TabsTrigger value="bodyclock">Body Clock</TabsTrigger>
           <TabsTrigger value="concepts">Core Theory</TabsTrigger>
           <TabsTrigger value="diet">Dietary Therapy</TabsTrigger>
         </TabsList>
@@ -454,6 +457,16 @@ export default function TCMTutorial() {
               </CardContent>
             </Card>
           ))}
+        </TabsContent>
+
+        {/* ─── BODY CLOCK ─── */}
+        <TabsContent value="bodyclock" className="space-y-6 mt-6">
+          <p className="font-body text-muted-foreground max-w-2xl">
+            The Chinese Body Clock (子午流注 Zǐ Wǔ Liú Zhù) maps how Qi
+            circulates through your 12 organ meridians in 2-hour cycles. Tap any
+            segment to learn what your body is doing and how to support it.
+          </p>
+          <BodyClock />
         </TabsContent>
 
         {/* ─── CORE THEORY ─── */}
