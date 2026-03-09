@@ -11,6 +11,7 @@ import { Hand, CircleDot, Search, Map } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { BodyMap } from "@/components/acupressure/BodyMap";
+import { SymptomSearch } from "@/components/acupressure/SymptomSearch";
 
 const MERIDIAN_META: Record<string, { emoji: string; color: string }> = {
   Lung: { emoji: "🫁", color: "hsl(200 60% 50%)" },
