@@ -95,7 +95,6 @@ function Book({ data, onSelect }: { data: BookData; onSelect: (path: string) => 
         color="#C9A94E"
         anchorX="center"
         anchorY="middle"
-        font="/fonts/playfair-display-v30-latin-700.woff"
         maxWidth={0.65}
       >
         {data.title}
