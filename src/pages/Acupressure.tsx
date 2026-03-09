@@ -49,6 +49,7 @@ const MERIDIAN_ORDER = [
 export default function Acupressure() {
   const [selectedMeridian, setSelectedMeridian] = useState("All");
   const [search, setSearch] = useState("");
+  const [showMap, setShowMap] = useState(true);
 
   const { data: points, isLoading } = useQuery({
     queryKey: ["acupressure"],
