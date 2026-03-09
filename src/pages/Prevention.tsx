@@ -17,6 +17,7 @@ const catIcons: Record<string, typeof BookOpen> = {
 };
 
 export default function Prevention() {
+  const [selectedBloodType, setSelectedBloodType] = useState("O");
   const { data: guidelines, isLoading: gLoading } = useQuery({
     queryKey: ["guidelines"],
     queryFn: async () => {
