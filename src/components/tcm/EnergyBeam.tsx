@@ -48,14 +48,7 @@ export function EnergyBeam({ start, end, color, active, jagged }: EnergyBeamProp
 
   return (
     <group>
-      <line ref={lineRef as any} geometry={geometry}>
-        <lineBasicMaterial
-          color={color}
-          transparent
-          opacity={jagged ? 0.9 : 0.6}
-          linewidth={1}
-        />
-      </line>
+      <primitive object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color, transparent: true, opacity: jagged ? 0.9 : 0.6 }))} ref={lineRef} />
       {/* Traveling particle */}
       <points ref={particleRef}>
         <bufferGeometry>
