@@ -110,3 +110,32 @@
     font-family: 'Playfair Display', Georgia, serif;
   }
 }
+
+/* Book page content styling */
+.book-page-content {
+  position: relative;
+  min-height: calc(100vh - 52px);
+}
+
+/* Parchment texture effect for book pages */
+.book-page-content::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, hsl(var(--accent) / 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, hsl(var(--primary) / 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Canvas cursor reset */
+canvas {
+  cursor: grab;
+}
+canvas:active {
+  cursor: grabbing;
+}
