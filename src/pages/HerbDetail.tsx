@@ -35,7 +35,7 @@ export default function HerbDetail() {
         </div>
         <EvidenceBadge label={herb.evidence_label} />
       </div>
-      <DisclaimerBanner />
+      
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">
           {herb.image_url && (
