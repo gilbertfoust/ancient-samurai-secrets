@@ -23,6 +23,7 @@ import Educational from "./pages/Educational";
 import Narratives from "./pages/Narratives";
 import NarrativeDetail from "./pages/NarrativeDetail";
 import SearchResults from "./pages/SearchResults";
+import TCMTutorial from "./pages/TCMTutorial";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
