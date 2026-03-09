@@ -274,9 +274,10 @@ export default function TCMTutorial() {
       />
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-4 w-full max-w-2xl">
+        <TabsList className="grid grid-cols-5 w-full max-w-3xl">
           <TabsTrigger value="interactive">3D Experience</TabsTrigger>
           <TabsTrigger value="elements">Five Elements</TabsTrigger>
+          <TabsTrigger value="bodyclock">Body Clock</TabsTrigger>
           <TabsTrigger value="concepts">Core Theory</TabsTrigger>
           <TabsTrigger value="diet">Dietary Therapy</TabsTrigger>
         </TabsList>
