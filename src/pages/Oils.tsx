@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { SectionHeader } from "@/components/SectionHeader";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
