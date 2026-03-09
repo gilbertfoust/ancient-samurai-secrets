@@ -509,10 +509,12 @@ export type Database = {
           cautions: string | null
           condition: string | null
           created_at: string
+          description: string | null
           dilutions: string | null
           evidence_label: Database["public"]["Enums"]["evidence_label"]
           id: string
           name: string
+          origin: string | null
           source_id: string | null
           updated_at: string
         }
@@ -521,10 +523,12 @@ export type Database = {
           cautions?: string | null
           condition?: string | null
           created_at?: string
+          description?: string | null
           dilutions?: string | null
           evidence_label?: Database["public"]["Enums"]["evidence_label"]
           id?: string
           name: string
+          origin?: string | null
           source_id?: string | null
           updated_at?: string
         }
@@ -533,10 +537,12 @@ export type Database = {
           cautions?: string | null
           condition?: string | null
           created_at?: string
+          description?: string | null
           dilutions?: string | null
           evidence_label?: Database["public"]["Enums"]["evidence_label"]
           id?: string
           name?: string
+          origin?: string | null
           source_id?: string | null
           updated_at?: string
         }
