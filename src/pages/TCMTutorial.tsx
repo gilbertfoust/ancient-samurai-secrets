@@ -459,6 +459,16 @@ export default function TCMTutorial() {
           ))}
         </TabsContent>
 
+        {/* ─── BODY CLOCK ─── */}
+        <TabsContent value="bodyclock" className="space-y-6 mt-6">
+          <p className="font-body text-muted-foreground max-w-2xl">
+            The Chinese Body Clock (子午流注 Zǐ Wǔ Liú Zhù) maps how Qi
+            circulates through your 12 organ meridians in 2-hour cycles. Tap any
+            segment to learn what your body is doing and how to support it.
+          </p>
+          <BodyClock />
+        </TabsContent>
+
         {/* ─── CORE THEORY ─── */}
         <TabsContent value="concepts" className="space-y-6 mt-6">
           <p className="font-body text-muted-foreground max-w-2xl">
