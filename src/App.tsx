@@ -58,6 +58,7 @@ const App = () => (
             <Route path="/narratives" element={<Narratives />} />
             <Route path="/narratives/:id" element={<NarrativeDetail />} />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/tcm" element={<TCMTutorial />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
