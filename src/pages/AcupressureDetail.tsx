@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,7 +32,7 @@ export default function AcupressureDetail() {
         <EvidenceBadge label={point.evidence_label} />
       </div>
       {point.condition && <p className="text-lg font-body text-muted-foreground">For: {point.condition}</p>}
-      <DisclaimerBanner />
+      
       <div className="space-y-6">
         {point.location_description && (
           <section>

@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,7 @@ export default function HerbDetail() {
         </div>
         <EvidenceBadge label={herb.evidence_label} />
       </div>
-      <DisclaimerBanner />
+      
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">
           {herb.image_url && (

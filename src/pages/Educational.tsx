@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { SectionHeader } from "@/components/SectionHeader";
 import { GraduationCap, Music, Pill, Search as SearchIcon } from "lucide-react";
 
@@ -45,7 +45,7 @@ export default function Educational() {
         accentColor="280 50% 50%"
         pattern="rings"
       />
-      <DisclaimerBanner />
+      
 
       {mL ? <Skeleton className="h-60 w-full" /> : (
         <Tabs defaultValue="mnemonics">

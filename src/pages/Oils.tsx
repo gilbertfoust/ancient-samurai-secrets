@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { SectionHeader } from "@/components/SectionHeader";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -37,7 +37,7 @@ export default function Oils() {
         accentColor="270 45% 50%"
         pattern="rings"
       />
-      <DisclaimerBanner />
+      
       <div className="relative max-w-sm">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input placeholder="Search oils by name or condition…" value={filter} onChange={(e) => setFilter(e.target.value)} className="pl-9 font-body" />

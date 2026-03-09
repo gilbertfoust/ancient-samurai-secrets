@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,7 +34,7 @@ export default function RecipeDetail() {
         <EvidenceBadge label={recipe.evidence_label} />
       </div>
       {recipe.purpose && <p className="text-muted-foreground font-body text-lg">{recipe.purpose}</p>}
-      <DisclaimerBanner />
+      
 
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">

@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { SectionHeader } from "@/components/SectionHeader";
 import { Hand, CircleDot } from "lucide-react";
 
@@ -27,7 +27,7 @@ export default function Acupressure() {
         accentColor="0 50% 42%"
         pattern="dots"
       />
-      <DisclaimerBanner />
+      
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2">
           {Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-36 rounded-lg" />)}
