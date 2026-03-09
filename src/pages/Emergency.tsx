@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+
 import { SectionHeader } from "@/components/SectionHeader";
 import { Siren, Package, Skull, Thermometer } from "lucide-react";
 
