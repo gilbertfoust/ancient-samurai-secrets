@@ -5,6 +5,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+import { SectionHeader } from "@/components/SectionHeader";
+import { Hand, CircleDot } from "lucide-react";
 
 export default function Acupressure() {
   const { data: points, isLoading } = useQuery({
@@ -17,11 +19,14 @@ export default function Acupressure() {
   });
 
   return (
-    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-display font-bold">Acupressure Points</h1>
-        <p className="text-muted-foreground font-body mt-1">Pressure point locations and techniques.</p>
-      </div>
+    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6 animate-fade-in">
+      <SectionHeader
+        icon={Hand}
+        title="Acupressure Points"
+        subtitle="Pressure point locations, techniques and therapeutic applications."
+        accentColor="0 50% 42%"
+        pattern="dots"
+      />
       <DisclaimerBanner />
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2">
@@ -31,10 +36,13 @@ export default function Acupressure() {
         <div className="grid gap-4 sm:grid-cols-2">
           {points?.map((p) => (
             <Link key={p.id} to={`/acupressure/${p.id}`}>
-              <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
+              <Card className="h-full hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer group border-border/60">
                 <CardHeader>
                   <div className="flex items-start justify-between gap-2">
-                    <CardTitle className="font-display text-lg">{p.point_name}</CardTitle>
+                    <div className="flex items-center gap-2">
+                      <CircleDot className="h-4 w-4 text-red-400/60 group-hover:text-red-500 transition-colors shrink-0" />
+                      <CardTitle className="font-display text-lg">{p.point_name}</CardTitle>
+                    </div>
                     <EvidenceBadge label={p.evidence_label} />
                   </div>
                   {p.condition && <CardDescription className="font-body">For: {p.condition}</CardDescription>}

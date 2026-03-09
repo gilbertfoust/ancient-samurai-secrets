@@ -4,6 +4,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SectionHeader } from "@/components/SectionHeader";
+import { ClipboardList, Calendar, Syringe } from "lucide-react";
 
 export default function Screening() {
   const { data: exams, isLoading: eL } = useQuery({
@@ -25,11 +27,14 @@ export default function Screening() {
   });
 
   return (
-    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-display font-bold">Screening & Lifecycle Care</h1>
-        <p className="text-muted-foreground font-body mt-1">Recommended exams and vaccinations by age and gender.</p>
-      </div>
+    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6 animate-fade-in">
+      <SectionHeader
+        icon={ClipboardList}
+        title="Screening & Lifecycle Care"
+        subtitle="Recommended exams and vaccinations by age and gender."
+        accentColor="200 60% 40%"
+        pattern="dots"
+      />
 
       {eL ? <Skeleton className="h-60 w-full" /> : (
         <Tabs defaultValue="exams">
@@ -39,8 +44,14 @@ export default function Screening() {
           </TabsList>
 
           <TabsContent value="exams" className="mt-4">
-            <Card>
-              <CardContent className="pt-6">
+            <Card className="border-border/60">
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5 text-primary/60" />
+                  <CardTitle className="font-display">Recommended Exams</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -68,8 +79,14 @@ export default function Screening() {
           </TabsContent>
 
           <TabsContent value="vaccines" className="mt-4">
-            <Card>
-              <CardContent className="pt-6">
+            <Card className="border-border/60">
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Syringe className="h-5 w-5 text-primary/60" />
+                  <CardTitle className="font-display">Vaccination Schedule</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>

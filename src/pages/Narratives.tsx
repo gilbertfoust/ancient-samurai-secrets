@@ -4,6 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { SectionHeader } from "@/components/SectionHeader";
+import { BookOpen, ScrollText } from "lucide-react";
 
 export default function Narratives() {
   const { data: narratives, isLoading } = useQuery({
@@ -16,11 +18,14 @@ export default function Narratives() {
   });
 
   return (
-    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-display font-bold">Cultural Narratives</h1>
-        <p className="text-muted-foreground font-body mt-1">Stories, travel notes and comparative case studies.</p>
-      </div>
+    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6 animate-fade-in">
+      <SectionHeader
+        icon={BookOpen}
+        title="Cultural Narratives"
+        subtitle="Stories, travel notes and comparative case studies."
+        accentColor="30 60% 42%"
+        pattern="waves"
+      />
       {isLoading ? (
         <div className="space-y-4">
           {Array.from({ length: 2 }).map((_, i) => <Skeleton key={i} className="h-28 rounded-lg" />)}
@@ -29,10 +34,13 @@ export default function Narratives() {
         <div className="space-y-4">
           {narratives?.map((n) => (
             <Link key={n.id} to={`/narratives/${n.id}`}>
-              <Card className="hover:shadow-md transition-shadow cursor-pointer">
+              <Card className="hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer group border-border/60">
                 <CardHeader>
                   <div className="flex items-start justify-between gap-2">
-                    <CardTitle className="font-display text-xl">{n.title}</CardTitle>
+                    <div className="flex items-center gap-2">
+                      <ScrollText className="h-5 w-5 shrink-0 group-hover:text-amber-600 transition-colors" style={{ color: "hsl(30 60% 42% / 0.6)" }} />
+                      <CardTitle className="font-display text-xl">{n.title}</CardTitle>
+                    </div>
                     <EvidenceBadge label={n.evidence_label} />
                   </div>
                   <CardDescription className="font-body line-clamp-2">{n.content?.slice(0, 200)}…</CardDescription>

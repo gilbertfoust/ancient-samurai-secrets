@@ -5,6 +5,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+import { SectionHeader } from "@/components/SectionHeader";
+import { Siren, Package, Skull, Thermometer } from "lucide-react";
 
 export default function Emergency() {
   const { data: items, isLoading: iL } = useQuery({
@@ -35,11 +37,14 @@ export default function Emergency() {
   });
 
   return (
-    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-display font-bold">Emergency & First Aid</h1>
-        <p className="text-muted-foreground font-body mt-1">Quick-reference emergency guides and first aid information.</p>
-      </div>
+    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6 animate-fade-in">
+      <SectionHeader
+        icon={Siren}
+        title="Emergency & First Aid"
+        subtitle="Quick-reference emergency guides and first aid information."
+        accentColor="0 72% 51%"
+        pattern="crosses"
+      />
       <DisclaimerBanner />
 
       {iL ? <Skeleton className="h-60 w-full" /> : (
@@ -53,9 +58,12 @@ export default function Emergency() {
           <TabsContent value="kit" className="mt-4">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {items?.map((item) => (
-                <Card key={item.id}>
+                <Card key={item.id} className="border-border/60 hover:shadow-sm transition-shadow">
                   <CardHeader className="pb-2">
-                    <CardTitle className="font-display text-base">{item.item_name}</CardTitle>
+                    <div className="flex items-center gap-2">
+                      <Package className="h-4 w-4 text-red-400/70 shrink-0" />
+                      <CardTitle className="font-display text-base">{item.item_name}</CardTitle>
+                    </div>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm font-body text-muted-foreground">{item.purpose}</p>
@@ -67,9 +75,12 @@ export default function Emergency() {
 
           <TabsContent value="poison" className="mt-4 space-y-6">
             {["ingested", "skin-contact"].map((type) => (
-              <Card key={type}>
+              <Card key={type} className="border-border/60">
                 <CardHeader>
-                  <CardTitle className="font-display capitalize">{type.replace("-", " ")} Poisoning</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Skull className="h-5 w-5 text-destructive/60" />
+                    <CardTitle className="font-display capitalize">{type.replace("-", " ")} Poisoning</CardTitle>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <ol className="space-y-2 font-body">
@@ -86,9 +97,12 @@ export default function Emergency() {
           </TabsContent>
 
           <TabsContent value="symptoms" className="mt-4">
-            <Card>
+            <Card className="border-border/60">
               <CardHeader>
-                <CardTitle className="font-display">Cold vs. Flu vs. H1N1</CardTitle>
+                <div className="flex items-center gap-2">
+                  <Thermometer className="h-5 w-5 text-primary/60" />
+                  <CardTitle className="font-display">Cold vs. Flu vs. H1N1</CardTitle>
+                </div>
               </CardHeader>
               <CardContent>
                 <Table>

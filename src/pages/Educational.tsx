@@ -5,6 +5,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DisclaimerBanner } from "@/components/DisclaimerBanner";
+import { SectionHeader } from "@/components/SectionHeader";
+import { GraduationCap, Music, Pill, Search as SearchIcon } from "lucide-react";
 
 export default function Educational() {
   const { data: mnemonics, isLoading: mL } = useQuery({
@@ -35,11 +37,14 @@ export default function Educational() {
   });
 
   return (
-    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-display font-bold">Educational Tools</h1>
-        <p className="text-muted-foreground font-body mt-1">Mnemonics, medication guides and learning aids.</p>
-      </div>
+    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6 animate-fade-in">
+      <SectionHeader
+        icon={GraduationCap}
+        title="Educational Tools"
+        subtitle="Mnemonics, medication guides and learning aids."
+        accentColor="280 50% 50%"
+        pattern="rings"
+      />
       <DisclaimerBanner />
 
       {mL ? <Skeleton className="h-60 w-full" /> : (
@@ -52,9 +57,12 @@ export default function Educational() {
 
           <TabsContent value="mnemonics" className="mt-4 space-y-4">
             {mnemonics?.map((m) => (
-              <Card key={m.id}>
+              <Card key={m.id} className="border-border/60 hover:shadow-sm transition-shadow">
                 <CardHeader>
-                  <CardTitle className="font-display">{m.title}</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Music className="h-4 w-4 text-purple-500/60 shrink-0" />
+                    <CardTitle className="font-display">{m.title}</CardTitle>
+                  </div>
                   {m.topic && <p className="text-sm text-muted-foreground font-body">Topic: {m.topic}</p>}
                 </CardHeader>
                 <CardContent>
@@ -65,8 +73,14 @@ export default function Educational() {
           </TabsContent>
 
           <TabsContent value="medications" className="mt-4">
-            <Card>
-              <CardContent className="pt-6">
+            <Card className="border-border/60">
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Pill className="h-5 w-5 text-primary/60" />
+                  <CardTitle className="font-display">Medication Reference</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -92,8 +106,14 @@ export default function Educational() {
           </TabsContent>
 
           <TabsContent value="pills" className="mt-4">
-            <Card>
-              <CardContent className="pt-6">
+            <Card className="border-border/60">
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <SearchIcon className="h-5 w-5 text-primary/60" />
+                  <CardTitle className="font-display">Pill Identification</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>
