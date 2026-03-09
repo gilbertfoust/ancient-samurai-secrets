@@ -23,6 +23,7 @@ import {
   CalendarCheck,
   GraduationCap,
   BookOpen,
+  Sparkles,
 } from "lucide-react";
 
 const sections = [
