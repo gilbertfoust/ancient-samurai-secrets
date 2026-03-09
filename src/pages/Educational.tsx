@@ -45,7 +45,7 @@ export default function Educational() {
         accentColor="280 50% 50%"
         pattern="rings"
       />
-      <DisclaimerBanner />
+      
 
       {mL ? <Skeleton className="h-60 w-full" /> : (
         <Tabs defaultValue="mnemonics">

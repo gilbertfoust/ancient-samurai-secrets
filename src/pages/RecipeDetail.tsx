@@ -34,7 +34,7 @@ export default function RecipeDetail() {
         <EvidenceBadge label={recipe.evidence_label} />
       </div>
       {recipe.purpose && <p className="text-muted-foreground font-body text-lg">{recipe.purpose}</p>}
-      <DisclaimerBanner />
+      
 
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">

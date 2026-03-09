@@ -63,7 +63,7 @@ export default function Prevention() {
         accentColor="210 60% 45%"
         pattern="waves"
       />
-      <DisclaimerBanner />
+      
 
       {isLoading ? (
         <Skeleton className="h-60 w-full" />

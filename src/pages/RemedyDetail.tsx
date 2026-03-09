@@ -33,7 +33,7 @@ export default function RemedyDetail() {
         <h1 className="text-3xl font-display font-bold">{remedy.condition}</h1>
         <EvidenceBadge label={remedy.evidence_label} />
       </div>
-      <DisclaimerBanner />
+      
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">
           {remedy.method && (

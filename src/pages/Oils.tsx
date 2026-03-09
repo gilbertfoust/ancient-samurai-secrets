@@ -37,7 +37,7 @@ export default function Oils() {
         accentColor="270 45% 50%"
         pattern="rings"
       />
-      <DisclaimerBanner />
+      
       <div className="relative max-w-sm">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input placeholder="Search oils by name or condition…" value={filter} onChange={(e) => setFilter(e.target.value)} className="pl-9 font-body" />

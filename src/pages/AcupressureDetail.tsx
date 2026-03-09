@@ -32,7 +32,7 @@ export default function AcupressureDetail() {
         <EvidenceBadge label={point.evidence_label} />
       </div>
       {point.condition && <p className="text-lg font-body text-muted-foreground">For: {point.condition}</p>}
-      <DisclaimerBanner />
+      
       <div className="space-y-6">
         {point.location_description && (
           <section>

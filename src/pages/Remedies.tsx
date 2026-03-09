@@ -32,7 +32,7 @@ export default function Remedies() {
         accentColor="0 55% 45%"
         pattern="crosses"
       />
-      <DisclaimerBanner />
+      
       <div className="relative max-w-sm">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input placeholder="Filter by condition…" value={filter} onChange={(e) => setFilter(e.target.value)} className="pl-9 font-body" />

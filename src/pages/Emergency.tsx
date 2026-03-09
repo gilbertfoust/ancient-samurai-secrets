@@ -45,7 +45,7 @@ export default function Emergency() {
         accentColor="0 72% 51%"
         pattern="crosses"
       />
-      <DisclaimerBanner />
+      
 
       {iL ? <Skeleton className="h-60 w-full" /> : (
         <Tabs defaultValue="kit">

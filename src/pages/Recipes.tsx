@@ -41,7 +41,7 @@ export default function Recipes() {
         accentColor="25 70% 45%"
         pattern="dots"
       />
-      <DisclaimerBanner />
+      
       <div className="relative max-w-sm">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input placeholder="Filter recipes…" value={filter} onChange={(e) => setFilter(e.target.value)} className="pl-9 font-body" />
