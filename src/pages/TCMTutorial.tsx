@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { EmotionalMetabolism, SceneState } from "@/components/tcm/EmotionalMetabolism";
 import { BodyClock } from "@/components/tcm/BodyClock";
+import { MeridianPathways } from "@/components/tcm/MeridianPathways";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
