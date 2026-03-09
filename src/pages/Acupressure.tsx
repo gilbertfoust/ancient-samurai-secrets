@@ -93,6 +93,8 @@ export default function Acupressure() {
         accentColor="0 50% 42%"
         pattern="dots"
       />
+      {/* Symptom Lookup */}
+      {points && <SymptomSearch points={points as any} />}
 
       {/* Search + Map Toggle */}
       <div className="flex items-center gap-3">
