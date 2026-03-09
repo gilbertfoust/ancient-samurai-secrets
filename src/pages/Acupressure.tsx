@@ -7,9 +7,10 @@ import { EvidenceBadge } from "@/components/EvidenceBadge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Hand, CircleDot, Search } from "lucide-react";
+import { Hand, CircleDot, Search, Map } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { BodyMap } from "@/components/acupressure/BodyMap";
 
 const MERIDIAN_META: Record<string, { emoji: string; color: string }> = {
   Lung: { emoji: "🫁", color: "hsl(200 60% 50%)" },
