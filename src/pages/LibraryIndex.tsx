@@ -21,6 +21,7 @@ const Educational = lazy(() => import("@/pages/Educational"));
 const Narratives = lazy(() => import("@/pages/Narratives"));
 const NarrativeDetail = lazy(() => import("@/pages/NarrativeDetail"));
 const SearchResults = lazy(() => import("@/pages/SearchResults"));
+const TCMTutorial = lazy(() => import("@/pages/TCMTutorial"));
 
 const BOOK_TITLES: Record<string, string> = {
   "/recipes": "Kitchen Formulary",
