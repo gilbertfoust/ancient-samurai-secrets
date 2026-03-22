@@ -188,8 +188,8 @@ function HangingScroll({ position }: { position: [number, number, number] }) {
   return (
     <group position={position}>
       {/* Top rod */}
-      <mesh position={[0, 0.6, 0]}>
-        <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} rotation={[0, 0, Math.PI / 2]} />
+      <mesh position={[0, 0.6, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
         <meshStandardMaterial color="#5D4037" roughness={0.6} metalness={0.2} />
       </mesh>
       {/* Scroll paper */}
