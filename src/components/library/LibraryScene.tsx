@@ -198,8 +198,8 @@ function HangingScroll({ position }: { position: [number, number, number] }) {
         <meshStandardMaterial color="#F5ECD7" roughness={0.95} side={THREE.DoubleSide} />
       </mesh>
       {/* Bottom weight rod */}
-      <mesh position={[0, -0.58, 0]}>
-        <cylinderGeometry args={[0.02, 0.02, 0.45, 8]} rotation={[0, 0, Math.PI / 2]} />
+      <mesh position={[0, -0.58, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.45, 8]} />
         <meshStandardMaterial color="#5D4037" roughness={0.6} metalness={0.2} />
       </mesh>
       {/* Calligraphy mark */}
