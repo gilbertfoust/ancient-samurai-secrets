@@ -109,6 +109,8 @@ export default function LibraryIndex() {
               return subPage ? <NarrativeDetail /> : <Narratives />;
             case "/search":
               return <SearchResults />;
+            case "/tcm":
+              return <TCMTutorial />;
             default:
               return null;
           }
