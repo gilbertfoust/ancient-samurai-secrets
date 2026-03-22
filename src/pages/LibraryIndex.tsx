@@ -21,6 +21,7 @@ const Educational = lazy(() => import("@/pages/Educational"));
 const Narratives = lazy(() => import("@/pages/Narratives"));
 const NarrativeDetail = lazy(() => import("@/pages/NarrativeDetail"));
 const SearchResults = lazy(() => import("@/pages/SearchResults"));
+const TCMTutorial = lazy(() => import("@/pages/TCMTutorial"));
 
 const BOOK_TITLES: Record<string, string> = {
   "/recipes": "Kitchen Formulary",
@@ -33,6 +34,7 @@ const BOOK_TITLES: Record<string, string> = {
   "/screening": "Lifecycle Care",
   "/educational": "Learning Tools",
   "/narratives": "Cultural Stories",
+  "/tcm": "Five Elements & TCM",
   "/search": "Search Results",
 };
 
@@ -107,6 +109,8 @@ export default function LibraryIndex() {
               return subPage ? <NarrativeDetail /> : <Narratives />;
             case "/search":
               return <SearchResults />;
+            case "/tcm":
+              return <TCMTutorial />;
             default:
               return null;
           }

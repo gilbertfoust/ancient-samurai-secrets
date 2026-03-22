@@ -25,6 +25,7 @@ const BOOKS: BookData[] = [
   { title: "Screening", subtitle: "Lifecycle Care", path: "/screening", color: "#1A5276", spineColor: "#AED6F1", position: [-1.2, 0, 0] },
   { title: "Education", subtitle: "Learning Tools", path: "/educational", color: "#6C3483", spineColor: "#D2B4DE", position: [-0.2, 0, 0] },
   { title: "Narratives", subtitle: "Cultural Stories", path: "/narratives", color: "#784212", spineColor: "#F0B27A", position: [0.8, 0, 0] },
+  { title: "TCM", subtitle: "Five Elements", path: "/tcm", color: "#B7410E", spineColor: "#F4A460", position: [1.8, 0.8, 0] },
 ];
 
 function Book({ data, onSelect }: { data: BookData; onSelect: (path: string) => void }) {
