@@ -15,17 +15,17 @@ interface BookData {
 }
 
 const BOOKS: BookData[] = [
-  { title: "Recipes", subtitle: "Kitchen Formulary", path: "/recipes", color: "#8B4513", spineColor: "#D4A574", position: [-3.2, 1.6, 0] },
-  { title: "Remedies", subtitle: "Condition Index", path: "/remedies", color: "#2F4F4F", spineColor: "#8FBC8F", position: [-2.2, 1.6, 0] },
-  { title: "Herbs", subtitle: "Materia Medica", path: "/herbs", color: "#556B2F", spineColor: "#9ACD32", position: [-1.2, 1.6, 0] },
-  { title: "Oils", subtitle: "Aromatherapy", path: "/oils", color: "#4A235A", spineColor: "#D7BDE2", position: [-0.2, 1.6, 0] },
-  { title: "Acupressure", subtitle: "Healing Points", path: "/acupressure", color: "#7B241C", spineColor: "#E6B0AA", position: [0.8, 1.6, 0] },
-  { title: "Prevention", subtitle: "Lifestyle Guide", path: "/prevention", color: "#1B4F72", spineColor: "#85C1E9", position: [-3.2, 0, 0] },
-  { title: "Emergency", subtitle: "First Aid", path: "/emergency", color: "#922B21", spineColor: "#F5B7B1", position: [-2.2, 0, 0] },
-  { title: "Screening", subtitle: "Lifecycle Care", path: "/screening", color: "#1A5276", spineColor: "#AED6F1", position: [-1.2, 0, 0] },
-  { title: "Education", subtitle: "Learning Tools", path: "/educational", color: "#6C3483", spineColor: "#D2B4DE", position: [-0.2, 0, 0] },
-  { title: "Narratives", subtitle: "Cultural Stories", path: "/narratives", color: "#784212", spineColor: "#F0B27A", position: [0.8, 0, 0] },
-  { title: "TCM", subtitle: "Five Elements", path: "/tcm", color: "#B7410E", spineColor: "#F4A460", position: [1.8, 0.8, 0] },
+  { title: "Recipes", subtitle: "Kitchen Formulary", path: "/recipes", color: "#8B4513", spineColor: "#D4A574", position: [-3.6, 1.6, 0] },
+  { title: "Remedies", subtitle: "Condition Index", path: "/remedies", color: "#2F4F4F", spineColor: "#8FBC8F", position: [-2.6, 1.6, 0] },
+  { title: "Herbs", subtitle: "Materia Medica", path: "/herbs", color: "#556B2F", spineColor: "#9ACD32", position: [-1.6, 1.6, 0] },
+  { title: "Oils", subtitle: "Aromatherapy", path: "/oils", color: "#4A235A", spineColor: "#D7BDE2", position: [-0.6, 1.6, 0] },
+  { title: "Acupressure", subtitle: "Healing Points", path: "/acupressure", color: "#7B241C", spineColor: "#E6B0AA", position: [0.4, 1.6, 0] },
+  { title: "TCM", subtitle: "Five Elements", path: "/tcm", color: "#B7410E", spineColor: "#F4A460", position: [1.4, 1.6, 0] },
+  { title: "Prevention", subtitle: "Lifestyle Guide", path: "/prevention", color: "#1B4F72", spineColor: "#85C1E9", position: [-3.6, 0, 0] },
+  { title: "Emergency", subtitle: "First Aid", path: "/emergency", color: "#922B21", spineColor: "#F5B7B1", position: [-2.6, 0, 0] },
+  { title: "Screening", subtitle: "Lifecycle Care", path: "/screening", color: "#1A5276", spineColor: "#AED6F1", position: [-1.6, 0, 0] },
+  { title: "Education", subtitle: "Learning Tools", path: "/educational", color: "#6C3483", spineColor: "#D2B4DE", position: [-0.6, 0, 0] },
+  { title: "Narratives", subtitle: "Cultural Stories", path: "/narratives", color: "#784212", spineColor: "#F0B27A", position: [0.4, 0, 0] },
 ];
 
 function Book({ data, onSelect }: { data: BookData; onSelect: (path: string) => void }) {
@@ -92,22 +92,22 @@ function Book({ data, onSelect }: { data: BookData; onSelect: (path: string) => 
       {/* Title text */}
       <Text
         position={[0, 0.15, 0.08]}
-        fontSize={0.1}
-        color="#C9A94E"
+        fontSize={0.14}
+        color="#F5E6C8"
         anchorX="center"
         anchorY="middle"
-        maxWidth={0.65}
+        maxWidth={0.7}
       >
         {data.title}
       </Text>
       {/* Subtitle */}
       <Text
-        position={[0, -0.08, 0.08]}
-        fontSize={0.055}
+        position={[0, -0.1, 0.08]}
+        fontSize={0.07}
         color={data.spineColor}
         anchorX="center"
         anchorY="middle"
-        maxWidth={0.65}
+        maxWidth={0.7}
       >
         {data.subtitle}
       </Text>
@@ -121,42 +121,42 @@ function Book({ data, onSelect }: { data: BookData; onSelect: (path: string) => 
 }
 
 function Bookshelf() {
-  const shelfColor = "#3E2723";
+  const shelfColor = "#5D4037";
   const shelfMaterial = useMemo(
-    () => new THREE.MeshStandardMaterial({ color: shelfColor, roughness: 0.9, metalness: 0.05 }),
+    () => new THREE.MeshStandardMaterial({ color: shelfColor, roughness: 0.8, metalness: 0.08 }),
     []
   );
 
   return (
     <group>
       {/* Back panel */}
-      <mesh position={[-1.2, 0.8, -0.15]}>
-        <boxGeometry args={[6, 4.5, 0.08]} />
-        <meshStandardMaterial color="#2C1810" roughness={0.95} />
+      <mesh position={[-1.1, 0.8, -0.15]}>
+        <boxGeometry args={[7, 4.5, 0.08]} />
+        <meshStandardMaterial color="#3E2723" roughness={0.9} />
       </mesh>
       {/* Shelves */}
       {[-0.8, 0.8, 2.4].map((y, i) => (
-        <mesh key={i} position={[-1.2, y, 0]} material={shelfMaterial}>
-          <boxGeometry args={[5.8, 0.1, 0.4]} />
+        <mesh key={i} position={[-1.1, y, 0]} material={shelfMaterial}>
+          <boxGeometry args={[6.8, 0.1, 0.4]} />
         </mesh>
       ))}
       {/* Left side */}
-      <mesh position={[-4.1, 0.8, 0]} material={shelfMaterial}>
+      <mesh position={[-4.5, 0.8, 0]} material={shelfMaterial}>
         <boxGeometry args={[0.12, 4.5, 0.4]} />
       </mesh>
       {/* Right side */}
-      <mesh position={[1.7, 0.8, 0]} material={shelfMaterial}>
+      <mesh position={[2.3, 0.8, 0]} material={shelfMaterial}>
         <boxGeometry args={[0.12, 4.5, 0.4]} />
       </mesh>
       {/* Top crown */}
-      <mesh position={[-1.2, 3.05, 0.05]}>
-        <boxGeometry args={[6.1, 0.15, 0.5]} />
-        <meshStandardMaterial color="#4E342E" roughness={0.7} metalness={0.1} />
+      <mesh position={[-1.1, 3.05, 0.05]}>
+        <boxGeometry args={[7.1, 0.15, 0.5]} />
+        <meshStandardMaterial color="#6D4C41" roughness={0.7} metalness={0.1} />
       </mesh>
       {/* Bottom base */}
-      <mesh position={[-1.2, -1.35, 0.05]}>
-        <boxGeometry args={[6.1, 0.15, 0.5]} />
-        <meshStandardMaterial color="#4E342E" roughness={0.7} metalness={0.1} />
+      <mesh position={[-1.1, -1.35, 0.05]}>
+        <boxGeometry args={[7.1, 0.15, 0.5]} />
+        <meshStandardMaterial color="#6D4C41" roughness={0.7} metalness={0.1} />
       </mesh>
     </group>
   );
@@ -211,7 +211,7 @@ function CandleLight({ position }: { position: [number, number, number] }) {
 
   return (
     <group position={position}>
-      <pointLight ref={lightRef} color="#FF9F43" intensity={0.8} distance={5} decay={2} />
+      <pointLight ref={lightRef} color="#FF9F43" intensity={0.8} distance={6} decay={2} />
       {/* Candle body */}
       <mesh position={[0, -0.15, 0]}>
         <cylinderGeometry args={[0.03, 0.035, 0.2, 8]} />
@@ -228,21 +228,23 @@ function CandleLight({ position }: { position: [number, number, number] }) {
 
 export function LibraryScene({ onSelectBook }: { onSelectBook: (path: string) => void }) {
   return (
-    <div className="w-full h-screen bg-[#0D0907]">
+    <div className="w-full h-screen bg-[#1A1410]">
       <Canvas
         shadows
-        camera={{ position: [0, 1.2, 5], fov: 50 }}
-        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 0.8 }}
+        camera={{ position: [0, 1.2, 6], fov: 50 }}
+        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
       >
-        <color attach="background" args={["#0D0907"]} />
-        <fog attach="fog" args={["#0D0907", 6, 14]} />
+        <color attach="background" args={["#1A1410"]} />
+        <fog attach="fog" args={["#1A1410", 8, 16]} />
 
-        <ambientLight intensity={0.15} color="#FFE4C4" />
-        <directionalLight position={[2, 4, 3]} intensity={0.3} color="#FFF8DC" castShadow />
+        <ambientLight intensity={0.4} color="#FFE4C4" />
+        <directionalLight position={[2, 4, 3]} intensity={0.6} color="#FFF8DC" castShadow />
+        <directionalLight position={[-3, 2, 2]} intensity={0.3} color="#FFD7A8" />
 
-        <CandleLight position={[-4.5, 2.8, 0.5]} />
-        <CandleLight position={[2.2, 2.8, 0.5]} />
+        <CandleLight position={[-4.8, 2.8, 0.5]} />
+        <CandleLight position={[2.6, 2.8, 0.5]} />
         <CandleLight position={[-1, 3.2, 1]} />
+        <CandleLight position={[-1, -0.6, 1.5]} />
 
         <Bookshelf />
 
@@ -255,7 +257,7 @@ export function LibraryScene({ onSelectBook }: { onSelectBook: (path: string) =>
         {/* Floor */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]} receiveShadow>
           <planeGeometry args={[20, 20]} />
-          <meshStandardMaterial color="#1A0F0A" roughness={0.95} />
+          <meshStandardMaterial color="#2A1F18" roughness={0.95} />
         </mesh>
 
         <OrbitControls
@@ -263,9 +265,9 @@ export function LibraryScene({ onSelectBook }: { onSelectBook: (path: string) =>
           enablePan={false}
           minPolarAngle={Math.PI / 4}
           maxPolarAngle={Math.PI / 2.2}
-          minDistance={3}
-          maxDistance={8}
-          target={[-1.2, 0.8, 0]}
+          minDistance={3.5}
+          maxDistance={9}
+          target={[-1.1, 0.8, 0]}
           autoRotate={false}
         />
       </Canvas>
