@@ -33,6 +33,7 @@ const BOOK_TITLES: Record<string, string> = {
   "/screening": "Lifecycle Care",
   "/educational": "Learning Tools",
   "/narratives": "Cultural Stories",
+  "/tcm": "Five Elements & TCM",
   "/search": "Search Results",
 };
 
